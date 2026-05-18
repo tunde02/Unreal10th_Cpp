@@ -54,3 +54,61 @@ Number--; // (Number = 53)
 printf("%5d\n", Number);
 
 */
+
+/*
+
+// 간단 실습
+// 두 수를 입력받아 스왑하기
+printf("두 수를 입력받아 스왑하기\n");
+int A1, B1;
+printf("숫자를 입력하세요 : ");
+std::cin >> A1;
+printf("또다른 숫자를 입력하세요 : ");
+std::cin >> B1;
+
+int Temp = A1;
+A1 = B1;
+B1 = Temp;
+printf("스왑 결과 : %d, %d\n\n", A1, B1);
+
+// 두 수를 입력받아 합을 출력하기
+printf("두 수를 입력받아 합을 출력하기\n");
+int A2, B2;
+printf("숫자를 입력하세요 : ");
+std::cin >> A2;
+printf("또다른 숫자를 입력하세요 : ");
+std::cin >> B2;
+
+printf("두 수의 합 : %d\n\n", A2 + B2);
+
+// 사각형의 가로, 세로를 입력받아 넓이를 출력하기
+printf("사각형의 가로, 세로를 입력받아 넓이를 출력하기\n");
+int Width, Height;
+printf("사각형의 가로 길이를 입력하세요 : ");
+std::cin >> Width;
+printf("사각형의 가로 길이를 입력하세요 : ");
+std::cin >> Height;
+
+printf("사각형의 넓이 : %d\n\n", Width * Height);
+
+// 두 수를 입력받아 나머지를 출력하기 - % 연사자 사용
+printf("두 수를 입력받아 나머지를 출력하기 - % 연사자 사용\n");
+int A3, B3;
+printf("숫자를 입력하세요 : ");
+std::cin >> A3;
+printf("또다른 숫자를 입력하세요 : ");
+std::cin >> B3;
+
+printf("첫 번째 수를 두 번째 수로 나눈 나머지 : %d\n\n", A3 % B3);
+
+// 두 수를 입력받아 나머지를 출력하기 - % 연사자 사용 X
+printf("두 수를 입력받아 나머지를 출력하기 - % 연사자 사용 X\n");
+int A4, B4;
+printf("숫자를 입력하세요 : ");
+std::cin >> A4;
+printf("또다른 숫자를 입력하세요 : ");
+std::cin >> B4;
+
+printf("첫 번째 수를 두 번째 수로 나눈 나머지 : %d\n\n", A4 - (A4 / B4 * B4));
+
+*/
