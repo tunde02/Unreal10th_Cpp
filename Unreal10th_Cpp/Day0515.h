@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-// printf »ç¿ë ¿¹½Ã
+// printf ì‚¬ìš© ì˜ˆì‹œ
 printf("Hello World\n");
 printf("Hello\tWorld\n");
 printf("Hello\t\tWorld\n");
