@@ -92,3 +92,60 @@ DiscountedPrice = OriginalPrice * (1.0f - (DiscountPercentage * 0.01f));
 printf("할인된 가격 : %d\n\n", (int)DiscountedPrice);
 
 **************************************************/
+
+/**************************************************
+
+// 비교 연산자
+bool bTest = false;
+bTest = 10 > 5;   // true
+bTest = 10 < 5;   // false
+bTest = 10 <= 5;  // false
+bTest = 10 >= 5;  // true
+bTest = 10 >= 10; // true
+bTest = 10 > 10;  // false
+bTest = 10 == 10; // true
+bTest = 0.1f + 0.2f == 0.3f; // 이런식의 비교는 절대로 하면 안된다
+
+// if, else if, else
+int a = 10;
+int b = 20;
+
+if (a > b)
+{
+	printf("a(%d)가 b(%d)보다 큽니다.\n", a, b);
+}
+else if (a == b)
+{
+	printf("a(%d)와 b(%d)가 같습니다.\n", a, b);
+}
+else
+{
+	printf("a(%d)가 b(%d)보다 작습니다.\n", a, b);
+}
+
+// switch
+a = 13;
+switch (a)
+{
+case 1:
+	printf("a는 1입니다.\n");
+	break;
+case 10:
+	printf("a는 1입니다.\n");
+	break;
+default:
+	printf("a는 %d입니다.\n", a);
+	break;
+}
+
+//삼항 연산자
+int x = (a > 10) ? 1 : 0;
+
+// 논리 연산자
+int Score = 78;
+if (80 <= Score && Score < 90)
+{
+	printf("B학점입니다.");
+}
+
+**************************************************/
