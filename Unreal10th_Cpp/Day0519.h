@@ -149,3 +149,130 @@ if (80 <= Score && Score < 90)
 }
 
 **************************************************/
+
+/**************************************************
+
+// 조건문 간단 실습 (입력은 정수만)
+	// 1. 숫자를 입력받아 양수인지 음수인지 0인지 판단하는 코드
+printf("1. 숫자를 입력받아 양수인지 음수인지 0인지 판단하는 코드\n");
+
+int Number = 0;
+printf("숫자를 입력하세요 : ");
+cin >> Number;
+
+if (Number == 0)
+{
+	printf("[%d]는 [0]입니다.\n\n", Number);
+}
+else if (Number > 0)
+{
+	printf("[%d]는 [양수]입니다.\n\n", Number);
+}
+else
+{
+	printf("[%d]는 [음수]입니다.\n\n", Number);
+}
+
+// 2. 숫자를 입력받아 홀수인지 짝수인지 판단하는 코드
+printf("2. 숫자를 입력받아 홀수인지 짝수인지 판단하는 코드\n");
+
+int OddOrEvenNumber = 0;
+printf("숫자를 입력하세요 : ");
+cin >> OddOrEvenNumber;
+
+if (OddOrEvenNumber % 2 == 0)
+{
+	printf("[%d]은(는) [짝수]입니다.\n\n", OddOrEvenNumber);
+}
+else
+{
+	printf("[%d]은(는) [홀수]입니다.\n\n", OddOrEvenNumber);
+}
+
+// 3. 두 수를 입력 받아 더 큰 수를 출력하는 코드. 같을 경우 같다고 출력
+printf("3. 두 수를 입력 받아 더 큰 수를 출력하는 코드. 같을 경우 같다고 출력\n");
+
+int Number1 = 0, Number2 = 0;
+printf("두 수를 입력하세요 : ");
+cin >> Number1 >> Number2;
+
+if (Number1 == Number2)
+{
+	printf("두 수 [%d], [%d]은(는) 서로 같습니다.\n\n", Number1, Number2);
+}
+else if (Number1 > Number2)
+{
+	printf("두 수 [%d], [%d]중 더 큰 수는 [%d]입니다.\n\n", Number1, Number2, Number1);
+}
+else
+{
+	printf("두 수 [%d], [%d]중 더 큰 수는 [%d]입니다.\n\n", Number1, Number2, Number2);
+}
+
+// 논리 연산자 간단 실습
+// 1. 나이와 키를 입력 받아, 6세 이상, 120cm 이상일 때 롤러코스터 탑승 가능, 그 외에는 불가능으로 출력하기
+printf("1. 나이와 키를 입력 받아, 6세 이상, 120cm 이상일 때 롤러코스터 탑승 가능, 그 외에는 불가능으로 출력하기\n");
+
+int Age = 0, Height = 0;
+printf("나이를 입력하세요 : ");
+cin >> Age;
+printf("키를 입력하세요 : ");
+cin >> Height;
+
+if (Age >= 6 && Height >= 120)
+{
+	printf("롤러코스터 탑승 [가능]\n\n");
+}
+else
+{
+	printf("롤러코스터 탑승 [불가능]\n\n");
+}
+
+// 2. 점수를 입력 받아 90점 이상은 A, 80점 이상은 B, 70점 이상은 C, 60점 이상은 D, 그 이하는 F라고 출력하기
+printf("2. 점수를 입력 받아 90점 이상은 A, 80점 이상은 B, 70점 이상은 C, 60점 이상은 D, 그 이하는 F라고 출력하기\n");
+
+int Score = 0;
+printf("점수를 입력하세요 : ");
+cin >> Score;
+
+if (Score >= 90)
+{
+	printf("[A]\n\n");
+}
+else if (Score >= 80)
+{
+	printf("[B]\n\n");
+}
+else if (Score >= 70)
+{
+	printf("[C]\n\n");
+}
+else if (Score >= 60)
+{
+	printf("[D]\n\n");
+}
+else
+{
+	printf("[F]\n\n");
+}
+
+// 3. 세 과목의 점수를 입력받아, 세 과목 평균 60점 이상이면 "합격", 아니면 "불합격"을 출력 (한 과목이라도 40점 미만이면 불합격)
+printf("3. 세 과목의 점수를 입력받아, 세 과목 평균 60점 이상이면 \"합격\", 아니면 \"불합격\"을 출력 (단, 한 과목이라도 40점 미만이면 불합격)\n");
+
+int Score1 = 0, Score2 = 0, Score3 = 0;
+int Average = 0;
+printf("세 과목의 점수를 입력하세요 : ");
+cin >> Score1 >> Score2 >> Score3;
+
+Average = (Score1 + Score2 + Score3) / 3;
+
+if (Average < 60 || (Score1 < 40 || Score2 < 40 || Score3 < 40))
+{
+	printf("[불합격]\n\n");
+}
+else
+{
+	printf("[합격]\n\n");
+}
+
+**************************************************/
