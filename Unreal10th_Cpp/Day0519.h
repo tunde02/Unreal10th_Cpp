@@ -276,3 +276,140 @@ else
 }
 
 **************************************************/
+
+/**************************************************
+
+// 1. 세 수 중 최댓값과 최솟값 찾기
+// - 3개의 정수를 입력받아, 그중 가장 큰 수와 가장 작은 수를 출력
+printf("1. 세 수 중 최댓값과 최솟값 찾기\n");
+
+int Number1 = 0, Number2 = 0, Number3 = 0;
+printf("세 수를 입력하세요 : ");
+cin >> Number1 >> Number2 >> Number3;
+
+int Min = Number1, Max = Number1;
+if (Min > Number2)
+{
+	Min = Number2;
+}
+if (Min > Number3)
+{
+	Min = Number3;
+}
+
+if (Max < Number2)
+{
+	Max = Number2;
+}
+if (Max < Number3)
+{
+	Max = Number3;
+}
+
+printf("[%d], [%d], [%d] 중 가장 작은 수 : [%d], 가장 큰 수 : [%d]\n\n", Number1, Number2, Number3, Min, Max);
+
+// 2. 세 개의 선분 길이를 입력받아, 이 선분들로 삼각형을 만들 수 있는지 판별하기
+// - 조건: 삼각형이 되려면 '가장 긴 변의 길이 < 나머지 두 변의 길이의 합'이어야 함.
+printf("2. 세 개의 선분 길이를 입력받아, 이 선분들로 삼각형을 만들 수 있는지 판별하기\n");
+
+int Line1 = 0, Line2 = 0, Line3 = 0;
+printf("세 개의 선분의 길이를 입력하세요 : ");
+cin >> Line1 >> Line2 >> Line3;
+
+int MaxLine = Line1;
+int OtherLines = Line2 + Line3;
+if (MaxLine < Line2)
+{
+	MaxLine = Line2;
+	OtherLines = Line1 + Line3;
+}
+if (MaxLine < Line3)
+{
+	MaxLine = Line3;
+	OtherLines = Line1 + Line2;
+}
+
+if (MaxLine < OtherLines)
+{
+	printf("삼각형을 만들 수 [있습니다].\n\n");
+}
+else
+{
+	printf("삼각형을 만들 수 [없습니다].\n\n");
+}
+
+// 3. 미니 계산기
+// - 두 개의 정수와 하나의 연산자(+, -, *, / )를 입력받아 결과를 출력
+// - 단, 나눗셈에서 0으로 나누려고 하면 "0으로 나눌 수 없습니다"라는 에러 메시지를 출력
+printf("3. 미니 계산기\n");
+
+int Operand1 = 0, Operand2 = 0;
+char Operator = '\0';
+printf("식을 입력하세요 : ");
+cin >> Operand1 >> Operator >> Operand2;
+
+switch (Operator)
+{
+case '+':
+	printf("%d %c %d = [%d]\n\n", Operand1, Operator, Operand2, Operand1 + Operand2);
+	break;
+case '-':
+	printf("%d %c %d = [%d]\n\n", Operand1, Operator, Operand2, Operand1 - Operand2);
+	break;
+case '*':
+	printf("%d %c %d = [%d]\n\n", Operand1, Operator, Operand2, Operand1 * Operand2);
+	break;
+case '/':
+	if (Operand2 == 0)
+	{
+		printf("ERROR: 0으로는 나눌 수 없습니다.\n\n");
+	}
+	else
+	{
+		printf("%d %c %d = [%d]\n\n", Operand1, Operator, Operand2, Operand1 / Operand2);
+	}
+	break;
+default:
+	printf("유효하지 않은 연산자(%c)입니다.\n\n", Operator);
+	break;
+}
+
+// 4. 윤년 판별기
+// - 연도(예 : 2024)를 입력받아 그 해가 윤년인지 평년인지 출력
+// - 윤년의 조건 :
+// - 연도가 4로 나누어 떨어지면 윤년이다.
+// - 하지만 100으로 나누어 떨어지면 평년이다.
+// - 그럼에도 400으로 나누어 떨어지면 윤년이다.
+printf("4. 윤년 판별기\n");
+
+int Year = 0;
+printf("연도를 입력하세요 : ");
+cin >> Year;
+
+bool IsLeapYear = false;
+
+if (Year % 4 == 0)
+{
+	IsLeapYear = true;
+}
+
+if (Year % 100 == 0)
+{
+	IsLeapYear = false;
+}
+
+if (Year % 400 == 0)
+{
+	IsLeapYear = true;
+}
+
+if (IsLeapYear)
+{
+	printf("[윤년]\n\n");
+}
+else
+{
+	printf("[평년]\n\n");
+}
+
+**************************************************/
