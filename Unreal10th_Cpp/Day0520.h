@@ -354,3 +354,121 @@ for (int i = 0; i < 10; i++)
 }
 
 **************************************************/
+
+/**************************************************
+
+// 랜덤 간단 실습
+// 1. 가위 바위 보 게임 만들기
+//   - 3선승제
+//   - enum 활용
+printf("\n1. 가위 바위 보 게임 만들기\n");
+
+srand(time(0));
+
+enum Shape
+{
+	Rock = 1,
+	Scissors,
+	Paper
+};
+int WinCount = 0;
+
+while (WinCount < 3)
+{
+	int UserShape = 0;
+	printf("가위, 바위, 보 중 하나를 선택하세요\n");
+	printf("1. 바위   2. 가위   3. 보\n");
+	printf(": ");
+	cin >> UserShape;
+
+	int ComputerShape = (rand() % 3) + 1;
+
+	switch (UserShape)
+	{
+	case Rock:
+		if (ComputerShape == Scissors)
+		{
+			printf("승리!! (유저 : 바위, 컴퓨터 : 가위)\n");
+			WinCount += 1;
+		}
+		else if (ComputerShape == Rock)
+		{
+			printf("무승부 (유저 : 바위, 컴퓨터 : 바위)\n");
+		}
+		else
+		{
+			printf("패배... (유저 : 바위, 컴퓨터 : 보)\n");
+		}
+		break;
+	case Scissors:
+		if (ComputerShape == Paper)
+		{
+			printf("승리!! (유저 : 가위, 컴퓨터 : 보)\n");
+			WinCount += 1;
+		}
+		else if (ComputerShape == Scissors)
+		{
+			printf("무승부 (유저 : 가위, 컴퓨터 : 가위)\n");
+		}
+		else
+		{
+			printf("패배... (유저 : 가위, 컴퓨터 : 바위)\n");
+		}
+		break;
+	case Paper:
+		if (ComputerShape == Rock)
+		{
+			printf("승리!! (유저 : 보, 컴퓨터 : 바위)\n");
+			WinCount += 1;
+		}
+		else if (ComputerShape == Paper)
+		{
+			printf("무승부 (유저 : 보, 컴퓨터 : 보)\n");
+		}
+		else
+		{
+			printf("패배... (유저 : 보, 컴퓨터 : 가위)\n");
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+printf("%d번 승리하셨습니다!!\n", WinCount);
+
+// 2. 하이 로우
+//   - 컴퓨터가 1~100 사이의 임의의 숫자를 선택하고, 사용자가 맞출 때까지 입력을 받아 "더 높게", "더 낮게" 등의 힌트를 준다
+//   - 5번 안에 맞추면 승리
+printf("\n2. 하이 로우\n");
+
+int Count = 0;
+int RandomNumber = (rand() % 100) + 1;
+int UserNumber = -1;
+
+while (UserNumber != RandomNumber && Count < 6)
+{
+	Count++;
+	printf("숫자를 입력하세요(1 ~ 100) : ");
+	cin >> UserNumber;
+
+	if (UserNumber > RandomNumber)
+	{
+		printf("컴퓨터의 숫자는 %d보다 작습니다.\n", UserNumber);
+	}
+	else if (UserNumber < RandomNumber)
+	{
+		printf("컴퓨터의 숫자는 %d보다 큽니다.\n", UserNumber);
+	}
+}
+
+if (Count <= 5)
+{
+	printf("승리!!\n");
+}
+else
+{
+	printf("패배.. (컴퓨터의 숫자 : %d)\n", RandomNumber);
+}
+
+**************************************************/
