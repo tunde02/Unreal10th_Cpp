@@ -340,3 +340,17 @@ for (int CurrentFloor = 1; CurrentFloor <= PyramidFloor; CurrentFloor++)
 }
 
 **************************************************/
+
+/**************************************************
+
+// 랜덤
+srand(time(0));
+int RandomNumber = 0;
+
+for (int i = 0; i < 10; i++)
+{
+	RandomNumber = rand() % 6 + 1;
+	printf("Random : %d\n", RandomNumber);
+}
+
+**************************************************/
