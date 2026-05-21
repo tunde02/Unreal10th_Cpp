@@ -492,10 +492,10 @@ srand(time(0));
 //    - 대기 : [O] , 점프 : [O] , 공격 : [X] , 무적 : [O]
 enum PlayerState
 {
-    Idle = 1 << 0,
-    Jump = 1 << 1,
-    Attack = 1 << 2,
-    God = 1 << 3
+	Idle = 1 << 0,
+	Jump = 1 << 1,
+	Attack = 1 << 2,
+	God = 1 << 3
 };
 int CurrentPlayerState = 0;
 char IdleOX = CurrentPlayerState & Idle ? 'O' : 'X';
@@ -573,86 +573,97 @@ printf("대기 : [%c] , 점프 : [%c] , 공격 : [%c] , 무적 : [%c]\n\n", Idle
 //    - 동점일 경우 배팅 금액은 그대로 반환한다.
 //    6. 다음 판 진행
 //    - 소지금이 0 이하인 쪽이 나오면 게임 종료.
-int PlayerCash = 10000, ComputerCash = 10000;
-const int COMPUTER_BET_AMOUNT = 1000;
+const int InitialCash = 10000;
+const int ComputerBetAmount = 1000;
+const int DiceSize = 6;
+int PlayerCash = InitialCash, ComputerCash = InitialCash;
+int PlayerDice1 = 0, ComputerDice1 = 0;
+int PlayerDice2 = 0, ComputerDice2 = 0;
+int PlayerDiceSum = 0, ComputerDiceSum = 0;
+int MaxBetAmount = 0;
+int BetAmount = 0;
+bool PlayerLost = false;
 
 while (PlayerCash > 0 && ComputerCash > 0)
 {
-    printf("\n=====[게임 시작]=====\n");
-    int PlayerDice1 = 0, ComputerDice1 = 0;
-    int PlayerDice2 = 0, ComputerDice2 = 0;
-    int PlayerDiceSum = 0, ComputerDiceSum = 0;
+	printf("\n=====[게임 시작]=====\n");
+	PlayerDice1 = 0;
+	PlayerDice2 = 0;
+	PlayerDiceSum = 0;
+	ComputerDice1 = 0;
+	ComputerDice2 = 0;
+	ComputerDiceSum = 0;
 
-    // 1차 주사위 굴리기
-    while (PlayerDice1 == ComputerDice1)
-    {
-        PlayerDice1 = (rand() % 6) + 1;
-        ComputerDice1 = (rand() % 6) + 1;
-    }
-    printf("\n[1차 주사위 굴리기]\n");
-    printf("플레이어 : %d  |  컴퓨터 : %d\n", PlayerDice1, ComputerDice1);
+	// 1차 주사위 굴리기
+	PlayerDice1 = (rand() % DiceSize) + 1;
+	ComputerDice1 = (rand() % DiceSize) + 1;
+	printf("\n[1차 주사위 굴리기]\n");
+	printf("플레이어 : %d  |  컴퓨터 : %d\n", PlayerDice1, ComputerDice1);
 
-    // 배팅
-    int BetAmount = 0;
-    if (PlayerDice1 >= ComputerDice1)
-    {
-        do
-        {
-            printf("[소지 금액 : %d$]  [컴퓨터 소지 금액 : %d$]\n", PlayerCash, ComputerCash);
-            printf("배팅 금액을 입력하세요 : ");
-            cin >> BetAmount;
+	// 배팅
+	MaxBetAmount = PlayerCash < ComputerCash ? PlayerCash : ComputerCash;
+	BetAmount = 0;
+	if (PlayerLost)
+	{
+		do
+		{
+			printf("[소지 금액 : %d$]  [컴퓨터 소지 금액 : %d$]\n", PlayerCash, ComputerCash);
+			printf("배팅 금액을 입력하세요 : ");
+			cin >> BetAmount;
+			cin.clear();				// 에러 상태 해제
+			cin.ignore(10000, '\n');	// 이전 입력 버퍼 제거. \n 나올 때까지 최대 10000글자 제거
 
-            if (BetAmount == 0 || BetAmount > PlayerCash || BetAmount > ComputerCash)
-            {
-                printf("적절한 배팅 금액을 다시 입력해주세요.\n");
-            }
-        } while (BetAmount <= 0 || BetAmount > PlayerCash || BetAmount > ComputerCash);
-    }
-    else
-    {
-        BetAmount = COMPUTER_BET_AMOUNT > PlayerCash ? PlayerCash : COMPUTER_BET_AMOUNT;
-    }
-    printf("\n[배팅 금액 : %d$]\n", BetAmount);
+			if (BetAmount <= 0 || BetAmount > MaxBetAmount)
+			{
+				printf("적절한 배팅 금액을 다시 입력해주세요.\n");
+			}
+		} while (BetAmount <= 0 || BetAmount > MaxBetAmount);
+	}
+	else
+	{
+		BetAmount = (rand() % MaxBetAmount) + 1;
+	}
+	printf("\n[배팅 금액 : %d$]\n", BetAmount);
 
-    PlayerCash -= BetAmount;
-    ComputerCash -= BetAmount;
-    printf("[배팅 금액이 소지금에서 차감됐습니다]\n");
-    printf("[소지 금액 : %d$]  [컴퓨터 소지 금액 : %d$]\n", PlayerCash, ComputerCash);
+	PlayerCash -= BetAmount;
+	ComputerCash -= BetAmount;
+	printf("[배팅 금액이 소지금에서 차감됐습니다]\n");
+	printf("[소지 금액 : %d$]  [컴퓨터 소지 금액 : %d$]\n", PlayerCash, ComputerCash);
 
-    // 2차 주사위 굴리기
-    while (PlayerDice2 == ComputerDice2)
-    {
-        PlayerDice2 = (rand() % 6) + 1;
-        ComputerDice2 = (rand() % 6) + 1;
-    }
-    printf("\n[2차 주사위 굴리기]\n");
-    printf("플레이어 : %d  |  컴퓨터 : %d\n", PlayerDice2, ComputerDice2);
+	// 2차 주사위 굴리기
+	PlayerDice2 = (rand() % DiceSize) + 1;
+	ComputerDice2 = (rand() % DiceSize) + 1;
+	printf("\n[2차 주사위 굴리기]\n");
+	printf("플레이어 : %d  |  컴퓨터 : %d\n", PlayerDice2, ComputerDice2);
 
-    // 승패 판정 및 금액 증감
-    printf("\n[승패 판정] - ");
+	// 승패 판정 및 금액 증감
+	printf("\n[승패 판정] - ");
 
-    PlayerDiceSum = PlayerDice1 + PlayerDice2;
-    ComputerDiceSum = ComputerDice1 + ComputerDice2;
+	PlayerDiceSum = PlayerDice1 + PlayerDice2;
+	ComputerDiceSum = ComputerDice1 + ComputerDice2;
 
-    if (PlayerDiceSum > ComputerDiceSum)
-    {
-        PlayerCash += BetAmount * 2;
-        printf("[플레이어가 승리했습니다!!]\n");
-    }
-    else if (PlayerDiceSum < ComputerDiceSum)
-    {
-        ComputerCash += BetAmount * 2;
-        printf("[플레이어가 패배했습니다..]\n");
-    }
-    else
-    {
-        PlayerCash += BetAmount;
-        ComputerCash += BetAmount;
-        printf("[무승부]\n");
-    }
+	if (PlayerDiceSum > ComputerDiceSum)
+	{
+		printf("[플레이어가 승리했습니다!!]\n");
+		PlayerCash += BetAmount * 2;
+		PlayerLost = false;
+	}
+	else if (PlayerDiceSum < ComputerDiceSum)
+	{
+		printf("[플레이어가 패배했습니다..]\n");
+		ComputerCash += BetAmount * 2;
+		PlayerLost = true;
+	}
+	else
+	{
+		printf("[무승부]\n");
+		PlayerCash += BetAmount;
+		ComputerCash += BetAmount;
+		PlayerLost = false;
+	}
 
-    printf("[플레이어 주사위의 합 : %d]  [컴퓨터 주사위의 합 : %d]\n", PlayerDiceSum, ComputerDiceSum);
-    printf("[소지 금액 : %d$]  [컴퓨터 소지 금액 : %d$]\n", PlayerCash, ComputerCash);
+	printf("[플레이어 주사위의 합 : %d]  [컴퓨터 주사위의 합 : %d]\n", PlayerDiceSum, ComputerDiceSum);
+	printf("[소지 금액 : %d$]  [컴퓨터 소지 금액 : %d$]\n", PlayerCash, ComputerCash);
 }
 
 printf("\n[주사위 게임이 종료되었습니다]\n");
@@ -672,67 +683,74 @@ printf("\n[주사위 게임이 종료되었습니다]\n");
 //            - (B) 이긴 금액을 얻고, 다시 100원부터 새로 배팅 시작
 //    5. 게임 종료 조건
 //        - 플레이어가 소지금이 100원 미만일 경우 게임 종료.
-int PlayerCash = 100;
-int BetAmount = 100;
+const int InitialCash = 100;
+const int MinimumBetAmount = 100;
+int PlayerCash = InitialCash;
+int BetAmount = MinimumBetAmount;
+int PlayerDecision, ComputerDecision = 0;
 
-while (PlayerCash >= 100)
+while (PlayerCash >= InitialCash)
 {
-    printf("\n=====[게임 시작]  [소지 금액 : %d￦  |  현재 배팅 금액 : %d￦] =====\n", PlayerCash, BetAmount);
+	printf("\n=====[게임 시작]  [소지 금액 : %d￦  |  현재 배팅 금액 : %d￦] =====\n", PlayerCash, BetAmount);
 
-    // 홀짝 선택
-    int PlayerDecision = 0;
-    while (!(PlayerDecision == 1 || PlayerDecision == 2))
-    {
-        printf("(1) 홀   (2)짝\n");
-        printf("홀짝을 선택하세요 : ");
-        cin >> PlayerDecision;
+	// 홀짝 선택
+	PlayerDecision = 0;
+	while (!(PlayerDecision == 1 || PlayerDecision == 2))
+	{
+		printf("(1) 홀   (2)짝\n");
+		printf("홀짝을 선택하세요 : ");
+		cin >> PlayerDecision;
+		cin.clear();
+		cin.ignore(10000, '\n');
 
-        if (!(PlayerDecision == 1 || PlayerDecision == 2))
-        {
-            printf("ERROR: 올바른 숫자를 입력해주세요.\n");
-        }
-    }
+		if (!(PlayerDecision == 1 || PlayerDecision == 2))
+		{
+			printf("ERROR: 올바른 숫자를 입력해주세요.\n");
+		}
+	}
 
-    // 결과 결정
-    printf("\n[승패 판정] - ");
-    int ComputerDecision = (rand() % 2) + 1;
-    if (PlayerDecision == ComputerDecision)
-    {
-        printf("플레이어가 승리했습니다!!\n");
-        PlayerCash += BetAmount;
+	// 결과 결정
+	printf("\n[승패 판정] - ");
+	ComputerDecision = (rand() % 2) + 1;
+	if (PlayerDecision == ComputerDecision)
+	{
+		printf("플레이어가 승리했습니다!!\n");
+		PlayerCash += BetAmount;
 
-        // 연속 배팅 선택
-        PlayerDecision = 0;
-        while (!(PlayerDecision == 1 || PlayerDecision == 2))
-        {
-            printf("\n[연속 배팅 선택]  [소지 금액 : %d￦  |  현재 배팅 금액 : %d￦]\n", PlayerCash, BetAmount);
-            printf("(1) 이긴 금액을 모두 다시 한 번에 배팅 (연승 도전)\n");
-            printf("(2) 이긴 금액을 얻고, 다시 100원부터 새로 배팅 시작\n");
-            printf("배팅 방법을 선택하세요 : ");
-            cin >> PlayerDecision;
+		// 연속 배팅 선택
+		PlayerDecision = 0;
+		while (!(PlayerDecision == 1 || PlayerDecision == 2))
+		{
+			printf("\n[연속 배팅 선택]  [소지 금액 : %d￦  |  현재 배팅 금액 : %d￦]\n", PlayerCash, BetAmount);
+			printf("(1) 이긴 금액을 모두 다시 한 번에 배팅 (연승 도전)\n");
+			printf("(2) 이긴 금액을 얻고, 다시 100원부터 새로 배팅 시작\n");
+			printf("배팅 방법을 선택하세요 : ");
+			cin >> PlayerDecision;
+			cin.clear();
+			cin.ignore(10000, '\n');
 
-            if (!(PlayerDecision == 1 || PlayerDecision == 2))
-            {
-                printf("ERROR: 올바른 숫자를 입력해주세요.\n");
-            }
-        }
+			if (!(PlayerDecision == 1 || PlayerDecision == 2))
+			{
+				printf("ERROR: 올바른 숫자를 입력해주세요.\n");
+			}
+		}
 
-        if (PlayerDecision == 1)
-        {
-            BetAmount *= 2;
-        }
-        else
-        {
-            BetAmount = 100;
-        }
-    }
-    else
-    {
-        PlayerCash -= BetAmount;
-        BetAmount = 100;
-        printf("플레이어가 패배했습니다..\n");
-        printf("[소지 금액 : %d￦]\n", PlayerCash);
-    }
+		if (PlayerDecision == 1)
+		{
+			BetAmount *= 2;
+		}
+		else
+		{
+			BetAmount = MinimumBetAmount;
+		}
+	}
+	else
+	{
+		PlayerCash -= BetAmount;
+		BetAmount = MinimumBetAmount;
+		printf("플레이어가 패배했습니다..\n");
+		printf("[소지 금액 : %d￦]\n", PlayerCash);
+	}
 }
 
 printf("\n[홀짝 게임이 종료되었습니다]\n");
