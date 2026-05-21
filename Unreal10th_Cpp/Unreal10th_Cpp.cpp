@@ -1,13 +1,25 @@
-﻿// Unreal10th_Cpp.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+// Unreal10th_Cpp.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
 //
 
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <stdio.h>
+#include <time.h>
+#include "Day0521_2.h"
+#include "Day0521_FunctionPractice_1.h"
+#include "Day0521_FunctionPractice_2.h"
+#include "Day0521_FunctionPractice_3.h"
+using std::cin;
 
 int main()
 {
-	printf("Hello Branch! Branch!\n");
-	printf("안녕하세요 브랜치!\n");
+	unsigned int Seed = (unsigned int)time(0);
+	srand(Seed);
+
+	RunPractice1();
+
+	RunPractice2();
+
+	RunPractice3();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
