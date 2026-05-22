@@ -231,3 +231,26 @@ void Day0522_Casting()
 	// static_cast
 	RealNumber = static_cast<float>(Integer);
 }
+
+void Day0522_Reference()
+{
+	// 참조
+	int Number = 10;
+	int Number2 = 20;
+	int& NumRef = Number;
+	// int& Ref; // 선언할 때 지정해줘야 함
+
+	Number = 100; // 참조하고 있는 변수인 Number의 값이 100이 된다
+	NumRef = Number2; // 재지정이 아니라, 참조한 변수에 Number2 값을 넘겨주라는 의미임
+
+	int Data1 = 0, Data2 = 0, Data3 = 0;
+	Test_Reference(Data1, Data2, Data3);
+	printf("%d %d %d\n", Data1, Data2, Data3); // 10 20 30
+}
+
+void Test_Reference(int& OutData1, int& OutData2, int& OutData3)
+{
+	OutData1 = 10;
+	OutData2 = 20;
+	OutData3 = 30;
+}
