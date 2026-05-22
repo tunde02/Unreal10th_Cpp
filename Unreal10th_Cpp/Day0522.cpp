@@ -365,3 +365,369 @@ void Day0522_ArrayParameter_Example03(int* Array, int Length)
 	printf("\n<Shuffled Array>\n");
 	Day0522_ArrayParameter_Example01(Array, Length);
 }
+
+void Day0522_Practice01()
+{
+	// 1. 6면체 주사위를 100만번 던져서 각 눈의 수가 몇번 나왔는지 카운팅하기(배열 활용하기)
+
+	const int DiceSize = 6;
+	int DiceCounts[DiceSize] = { 0 };
+
+	for (int i = 0; i < 1000000; i++)
+	{
+		int Dice = (rand() % DiceSize) + 1;
+		DiceCounts[Dice - 1] += 1;
+	}
+
+	printf("[나온 각 눈의 횟수]\n");
+	for (int i = 0; i < DiceSize; i++)
+	{
+		printf("눈 %d : [%d]회\n", i + 1, DiceCounts[i]);
+	}
+
+	printf("\n");
+}
+
+void Day0522_Practice02()
+{
+	// 2. 배열에 저장된 값을 거꾸로 뒤집는 함수 만들기(파라메터 : int* Array, int Size)
+
+	const int Length = 10;
+	int Array[Length] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+	printf("원본 배열 : ");
+	Test_ArrayParameter(Array, Length);
+
+	FlipArray(Array, Length);
+
+	printf("뒤집은 배열 : ");
+	Test_ArrayParameter(Array, Length);
+
+	printf("\n");
+}
+
+void FlipArray(int* Array, int Length)
+{
+	int HalfLength = Length / 2;
+	for (int i = 0; i < HalfLength; i++)
+	{
+		int Temp = Array[i];
+		Array[i] = Array[Length - i - 1];
+		Array[Length - i - 1] = Temp;
+	}
+}
+
+void Day0522_Practice03()
+{
+	// 3. 로또 번호 생성기(셔플알고리즘 활용하기)
+	// - 전체 숫자 범위 : 1번부터 45번까지
+	// - 맞춰야 하는 숫자 개수 : 6개
+
+	const int Length = 45;
+	const int CountToWin = 6;
+	int LotteryNumbers[Length] = { 0 };
+
+	for (int i = 0; i < Length; i++)
+	{
+		LotteryNumbers[i] = i + 1;
+	}
+
+	FisherYatesShuffle(LotteryNumbers, Length);
+
+	printf("로또 번호 : [ ");
+	for (int i = 0; i < CountToWin; i++)
+	{
+		printf("%d ", LotteryNumbers[i]);
+	}
+	printf("]\n");
+
+	printf("\n");
+}
+
+void Day0522_Practice04()
+{
+	/*
+	4. 미로 탈출 게임 만들기
+		- 2차원 배열을 활용하여 텍스트 기반 미로 탈출 게임을 구현.
+		- 미로의 구성
+		- 10행 20열의 2차원 배열
+		- 저장 방식
+		- 길(0) : '. '으로 표시
+		- 벽(1) : '# '으로 표시
+		- 시작점(2) : 'S '로 표시
+		- 출구(3) : 'E '로 표시
+		- 이동 입력 처리
+		- w(W) : 위, s(S) : 아래, a(A) : 왼쪽, d(D) : 오른쪽
+		- 대소문자 구분 없이 처리
+		- 플레이어가 출구에 도착하면 종료
+		- 플레이어는 ‘P ‘로 표시
+		- 게임 화면은 다음과 같은 양식을 따른다.
+		- w(↑) s(↓) a(←) d(→)는 이동 가능한 방향만 출력한다.
+		- 출력 예시
+			== = 텍스트 미로 탈출 게임 == =
+			[미로 화면 출력]
+			이동할 수 있는 방향을 선택하세요(w: 위, s : 아래, a : 왼쪽, d : 오른쪽) :
+			w(↑) s(↓) a(←) d(→)
+			방향 입력 :
+	*/
+
+	// 미로 크기
+	const int MazeRows = 10;
+	const int MazeCols = 10;
+
+	// 미로 배열
+	int Maze[MazeRows][MazeCols] = {
+		{1,1,1,1,1,1,1,1,1,1},
+		{1,2,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,0,1},
+		{1,0,0,0,0,0,0,1,0,1},
+		{1,0,1,1,1,1,0,1,0,1},
+		{1,0,1,3,1,1,0,1,0,1},
+		{1,0,1,0,0,0,0,1,0,1},
+		{1,0,1,1,1,1,1,1,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1}
+	};
+
+	const int StartX = 1;
+	const int StartY = 1;
+	const int EndX = 5;
+	const int EndY = 3;
+	int PlayerX = StartX;
+	int PlayerY = StartY;
+	TileType PlayerGround = Start; // 현재 플레이어가 밝고 있는 타일의 종류
+
+	// 플레이어 초기 위치 설정
+	PlayerGround = IntToTileType(Maze[PlayerX][PlayerY]);
+	Maze[PlayerX][PlayerY] = TileTypeToint(Player);
+
+	printf("== = 텍스트 미로 탈출 게임 == =\n");
+
+	while (!IsPlayerWin(PlayerX, PlayerY, EndX, EndY))
+	{
+		ShowMaze((int*)Maze, MazeRows, MazeCols);
+
+		printf("이동할 수 있는 방향을 선택하세요(w: 위, s : 아래, a : 왼쪽, d : 오른쪽)\n");
+		ShowMovableDirections((int*)Maze, MazeRows, MazeCols, PlayerX, PlayerY);
+		printf("\n : ");
+
+		DirectionType PlayerInputDirection = InputDirection();
+		if (PlayerInputDirection == DirectionCount)
+		{
+			continue;
+		}
+
+		int NextX = PlayerX;
+		int NextY = PlayerY;
+		switch (PlayerInputDirection)
+		{
+		case Up:
+			NextX += -1;
+			NextY += 0;
+			break;
+		case Down:
+			NextX += 1;
+			NextY += 0;
+			break;
+		case Left:
+			NextX += 0;
+			NextY += -1;
+			break;
+		case Right:
+			NextX += 0;
+			NextY += 1;
+			break;
+		default:
+			break;
+		}
+
+		if (CanMoveTo((int*)Maze, MazeRows, MazeCols, PlayerX, PlayerY, PlayerInputDirection))
+		{
+			Maze[PlayerX][PlayerY] = TileTypeToint(PlayerGround);
+			PlayerGround = IntToTileType(Maze[NextX][NextY]);
+			Maze[NextX][NextY] = TileTypeToint(Player);
+			PlayerX = NextX;
+			PlayerY = NextY;
+		}
+	}
+
+	ShowMaze((int*)Maze, MazeRows, MazeCols);
+}
+
+void ShowMaze(int* Array, int RowLength, int ColumnLength)
+{
+	for (int i = 0; i < RowLength; i++)
+	{
+		for (int j = 0; j < ColumnLength; j++)
+		{
+			int Tile = *(Array + (i * ColumnLength) + j);
+			switch (Tile)
+			{
+			case Road:
+				printf(". ");
+				break;
+			case Wall:
+				printf("# ");
+				break;
+			case Start:
+				printf("S ");
+				break;
+			case End:
+				printf("E ");
+				break;
+			case Player:
+				printf("P ");
+				break;
+			default:
+				break;
+			}
+		}
+		printf("\n");
+	}
+}
+
+TileType IntToTileType(int TileInt)
+{
+	switch (TileInt)
+	{
+	case 0:
+		return Road;
+	case 1:
+		return Wall;
+	case 2:
+		return Start;
+	case 3:
+		return End;
+	case 4:
+		return Player;
+	default:
+		return Road;
+	}
+}
+
+int TileTypeToint(TileType Tile)
+{
+	switch (Tile)
+	{
+	case Road:
+		return 0;
+	case Wall:
+		return 1;
+	case Start:
+		return 2;
+	case End:
+		return 3;
+	case Player:
+		return 4;
+	default:
+		return 0;
+	}
+}
+
+DirectionType IntToDirection(int DirectionInt)
+{
+	switch (DirectionInt)
+	{
+	case 0:
+		return Up;
+	case 1:
+		return Down;
+	case 2:
+		return Left;
+	case 3:
+		return Right;
+	default:
+		return DirectionCount;
+	}
+}
+
+int DirectionTypeToInt(DirectionType Direction)
+{
+	switch (Direction)
+	{
+	case Up:
+		return 0;
+	case Down:
+		return 1;
+	case Left:
+		return 2;
+	case Right:
+		return 3;
+	case DirectionCount:
+		return 4;
+	default:
+		return 0;
+	}
+}
+
+bool IsPlayerWin(int PlayerX, int PlayerY, int EndX, int EndY)
+{
+	return (PlayerX == EndX) && (PlayerY == EndY);
+}
+
+bool CanMoveTo(int* Array, int RowLength, int ColumnLength, int PlayerX, int PlayerY, DirectionType Direction)
+{
+	const int Dx[4] = { -1, 1, 0, 0 };
+	const int Dy[4] = { 0, 0, -1, 1 };
+	int DirectionIndex = DirectionTypeToInt(Direction);
+	int NextX = PlayerX + Dx[DirectionIndex];
+	int NextY = PlayerY + Dy[DirectionIndex];
+
+	return (-1 < NextX && NextX < RowLength) && (-1 < NextY && NextY < ColumnLength)
+		&& IntToTileType(*(Array + (NextX * ColumnLength) + NextY)) != Wall;
+}
+
+void ShowMovableDirections(int* Array, int RowLength, int ColumnLength, int PlayerX, int PlayerY)
+{
+	printf("이동 가능한 방향 : ");
+	if (CanMoveTo(Array, RowLength, ColumnLength, PlayerX, PlayerY, Up))
+	{
+		printf("w(↑) ");
+	}
+	if (CanMoveTo(Array, RowLength, ColumnLength, PlayerX, PlayerY, Down))
+	{
+		printf("s(↓) ");
+	}
+	if (CanMoveTo(Array, RowLength, ColumnLength, PlayerX, PlayerY, Left))
+	{
+		printf("a(←) ");
+	}
+	if (CanMoveTo(Array, RowLength, ColumnLength, PlayerX, PlayerY, Right))
+	{
+		printf("d(→) ");
+	}
+}
+
+DirectionType InputDirection()
+{
+	char PlayerInput = 0;
+
+	cin >> PlayerInput;
+	cin.clear();
+	cin.ignore(10000, '\n');
+
+	DirectionType Direction = DirectionCount;
+	switch (PlayerInput)
+	{
+	case 'w':
+	case 'W':
+		Direction = Up;
+		break;
+	case 's':
+	case 'S':
+		Direction = Down;
+		break;
+	case 'a':
+	case 'A':
+		Direction = Left;
+		break;
+	case 'd':
+	case 'D':
+		Direction = Right;
+		break;
+	default:
+		break;
+	}
+
+	return Direction;
+}
