@@ -254,3 +254,114 @@ void Test_Reference(int& OutData1, int& OutData2, int& OutData3)
 	OutData2 = 20;
 	OutData3 = 30;
 }
+
+void Day0522_ArrayParameter()
+{
+	//const int Length = 5;
+	//int Array[Length] = { 10, 50, 30, 20, 40 };
+
+	// 포인터(*)와 배열은 근본적으로 같다
+	//Test_ArrayParameter(Array, Length);
+
+	// 간단 실습
+	const int Length = 6;
+	int Array[Length] = { 1, 10, 20, 100, 1000, 77777 };
+
+	Day0522_ArrayParameter_Example01(Array, Length);
+	Day0522_ArrayParameter_Example02(Array, Length);
+
+	const int DataSize = 100;
+	int Data[DataSize] = { 0 };
+	for (int i = 0; i < DataSize; i++)
+	{
+		Data[i] = i;
+	}
+	Day0522_ArrayParameter_Example03(Data, DataSize);
+}
+
+void Test_ArrayParameter(int* Array, int Length)
+{
+	printf("[ ");
+	for (int i = 0; i < Length; i++)
+	{
+		printf("%d ", Array[i]);
+	}
+	printf("]\n");
+}
+
+void FisherYatesShuffle(int* Array, int Length)
+{
+	// 1. 배열의 마지막 요소부터 반대방향으로 순회한다
+	// 2. 0~인덱스 까지의 요소들 중 임의로 선택
+	// 3. 인덱스가 가리키는 요소와 임의로 선택한 요소를 교환
+	// 4. 인덱스 1 감소
+	// 5. 2~4 반복. 인덱스가 0이 되면 종료
+
+	for (int i = Length - 1; i > -1; i--)
+	{
+		int RandomIndex = rand() % (i + 1);
+
+		int Temp = Array[RandomIndex];
+		Array[RandomIndex] = Array[i];
+		Array[i] = Temp;
+	}
+}
+
+void Day0522_ArrayParameter_Example01(int* Array, int Length)
+{
+	// 1. 배열의 값들을 전부 출력해주는 함수 만들기
+
+	printf("Array : [ ");
+	for (int i = 0; i < Length; i++)
+	{
+		printf("%d ", Array[i]);
+	}
+	printf("]\n");
+}
+
+void Day0522_ArrayParameter_Example02(int* Array, int Length)
+{
+	// 2. 배열을 파라미터로 받는 함수를 만들어 구현하기
+	//   - 배열 내부값을 모두 더하고 평균 구해보기
+	//   - 배열의 값 중 최대값과 최소값 구해보기
+
+	int Sum = 0;
+	float Average = 0;
+	int Min = INT32_MAX, Max = INT32_MIN;
+
+	SumAndAverageOfArray(Array, Length, Sum, Average);
+	MinAndMaxOfArray(Array, Length, Min, Max);
+
+	printf("배열 원소들의 합 : %d\n", Sum);
+	printf("배열 원소들의 평균 : %.1f\n", Average);
+	printf("배열 원소들의 최소값 : %d\n", Min);
+	printf("배열 원소들의 최대값 : %d\n", Max);
+}
+
+void SumAndAverageOfArray(int* Array, int Length, int& OutSum, float& OutAverage)
+{
+	for (int i = 0; i < Length; i++)
+	{
+		OutSum += Array[i];
+	}
+
+	OutAverage = OutSum / (float)Length;
+}
+
+void MinAndMaxOfArray(int* Array, int Length, int& OutMin, int& OutMax)
+{
+	for (int i = 0; i < Length; i++)
+	{
+		OutMax = OutMax < Array[i] ? Array[i] : OutMax;
+		OutMin = OutMin > Array[i] ? Array[i] : OutMin;
+	}
+}
+
+void Day0522_ArrayParameter_Example03(int* Array, int Length)
+{
+	// 3. 피셔-예이츠 알고리즘 완성하기
+
+	FisherYatesShuffle(Array, Length);
+	printf("\n<Shuffled Array>\n");
+	Day0522_ArrayParameter_Example01(Array, Length);
+}
