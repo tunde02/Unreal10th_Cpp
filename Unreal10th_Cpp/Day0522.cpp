@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Day0522.h"
+using std::cin;
 
-void Day0522_Array_Run()
+void Day0522_Array()
 {
 	// 배열
 	int Numbers[3] = { 0 };
@@ -215,4 +216,18 @@ void Day0522_Array_Example03()
 	printf("Array2의 최대값 : Array2[%d][%d] = %d\n", Max2RowIndex, Max2ColumnIndex, Max2);
 	printf("Array2의 최소값 : Array2[%d][%d] = %d\n", Min2RowIndex, Min2ColumnIndex, Min2);
 	printf("\n");
+}
+
+void Day0522_Casting()
+{
+	// C 스타일 캐스팅
+	int Integer = 10;
+	float RealNumber = (float)Integer; // Integer에 있는 값을 float타입으로 임시 변경한 후 RealNumber에 저장
+
+	bool Boolean = (bool)Integer;
+	Boolean = (bool)0;
+
+	// C++ 스타일 캐스팅
+	// static_cast
+	RealNumber = static_cast<float>(Integer);
 }
