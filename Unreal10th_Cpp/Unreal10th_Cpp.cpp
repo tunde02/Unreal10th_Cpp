@@ -18,12 +18,12 @@ int main()
 	srand(Seed);
 
 	// 배열
-	Day0522_Run();
+	Day0522_Array_Run();
 
 	// 배열 간단 실습
-	Day0522_Example01();
-	Day0522_Example02();
-	Day0522_Example03();
+	Day0522_Array_Example01();
+	Day0522_Array_Example02();
+	Day0522_Array_Example03();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

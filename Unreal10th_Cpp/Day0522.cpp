@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Day0522.h"
 
-void Day0522_Run()
+void Day0522_Array_Run()
 {
 	// 배열
 	int Numbers[3] = { 0 };
@@ -28,7 +28,7 @@ void Day0522_Run()
 	int Array4[4][3] = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12} }; // Array[12]와 메모리상의 구조는 똑같다
 }
 
-void Day0522_Example01()
+void Day0522_Array_Example01()
 {
 	// 1. 배열 만들고 초기화하고 전부 출력해보기 (1차원, 2차원 모두)
 	int Array1[5] = { 100, 30, 3587, 123875, 777 };
@@ -77,7 +77,7 @@ void Day0522_Example01()
 	printf("\n");
 }
 
-void Day0522_Example02()
+void Day0522_Array_Example02()
 {
 	// 2. 배열 내부의 값을 모두 더하고 평균 구해보기
 	int Array1[5] = { 100, 30, 3587, 123875, 777 };
@@ -136,7 +136,7 @@ void Day0522_Example02()
 	printf("\n");
 }
 
-void Day0522_Example03()
+void Day0522_Array_Example03()
 {
 	// 3. 배열의 값 중 최대값과 최소값 구해보기
 	int Array1[5] = { 100, 30, 3587, 123875, 777 };
