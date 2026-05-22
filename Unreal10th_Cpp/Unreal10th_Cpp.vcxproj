@@ -127,6 +127,7 @@
     <ClCompile Include="Day0521_FunctionPractice_1.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_2.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_3.cpp" />
+    <ClCompile Include="Day0522.cpp" />
     <ClCompile Include="Unreal10th_Cpp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="Day0521_FunctionPractice_1.h" />
     <ClInclude Include="Day0521_FunctionPractice_2.h" />
     <ClInclude Include="Day0521_FunctionPractice_3.h" />
+    <ClInclude Include="Day0522.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

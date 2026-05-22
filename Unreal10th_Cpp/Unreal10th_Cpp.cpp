@@ -8,18 +8,17 @@
 #include "Day0521_FunctionPractice_1.h"
 #include "Day0521_FunctionPractice_2.h"
 #include "Day0521_FunctionPractice_3.h"
+#include "Day0522.h"
 using std::cin;
 
 int main()
 {
 	unsigned int Seed = (unsigned int)time(0);
+	//Seed = 0; // For Debugging
 	srand(Seed);
 
-	RunPractice1();
-
-	RunPractice2();
-
-	RunPractice3();
+	// 배열
+	Day0522_Run();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
