@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Day0526.h"
+using std::cin;
 
 void Day0526()
 {
@@ -104,4 +105,18 @@ void Day0526_Example_03(int* Array, int Size)
 		*(Array + i) = *(Array + Size - 1 - i);
 		*(Array + Size - 1 - i) = Temp;
 	}
+
+	/*
+
+	int* Left = Array;
+	int* Right = Array + (Size - 1);
+
+	while (Left < Right)
+	{
+		Day0526_Example_01(Left, Right);
+		Left++;
+		Right--;
+	}
+
+	*/
 }
