@@ -29,12 +29,14 @@ void Day0526()
 
 	*/
 
+	/*
+
 	// 간단 실습
 	int a = 10, b = 8;
+	int Array[5] = { 1, 2, 3, 4, 5 };
 	Day0526_Example_01(&a, &b);
 	printf("%d %d\n", a, b);
 
-	int Array[5] = { 1, 2, 3, 4, 5 };
 	int Max = Day0526_Example_02(Array, 5);
 	printf("Array의 최대값 : %d\n", Max);
 
@@ -44,6 +46,20 @@ void Day0526()
 		printf("%d ", Element);
 	}
 	printf("\n");
+
+	*/
+
+	/*
+
+	// 동적 할당
+	int* Alloc = new int(5);
+	delete Alloc; // 반드시 반드시 사용한 메모리는 해제해야 한다
+	Alloc = nullptr;
+
+	Alloc = new int[10] { 0 };// int 10개짜리 배열을 만들어라
+	delete[] Alloc; // 배열을 할당받은 것을 해제할 때 []도 같이 써야되는 것 주의
+
+	*/
 }
 
 void Day0526_PointerParameter(int* Data, int Size)
