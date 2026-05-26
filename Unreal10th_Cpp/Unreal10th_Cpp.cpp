@@ -4,12 +4,13 @@
 #include <iostream>
 #include <stdio.h>
 #include <time.h>
-#include "Day0521_2.h"
-#include "Day0521_FunctionPractice_1.h"
-#include "Day0521_FunctionPractice_2.h"
-#include "Day0521_FunctionPractice_3.h"
-#include "Day0522.h"
-#include "Day0526.h"
+//#include "Day0521_2.h"
+//#include "Day0521_FunctionPractice_1.h"
+//#include "Day0521_FunctionPractice_2.h"
+//#include "Day0521_FunctionPractice_3.h"
+//#include "Day0522.h"
+//#include "Day0526.h"
+#include "Day0526_PointerPractice_1.h"
 using std::cin;
 
 int main()
@@ -18,8 +19,8 @@ int main()
 	//Seed = 0; // For Debugging
 	srand(Seed);
 
-	// 포인터
-	Day0526();
+	// 실습
+	Day0526_Practice_01();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
