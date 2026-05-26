@@ -9,6 +9,7 @@
 #include "Day0521_FunctionPractice_2.h"
 #include "Day0521_FunctionPractice_3.h"
 #include "Day0522.h"
+#include "Day0526.h"
 using std::cin;
 
 int main()
@@ -17,29 +18,8 @@ int main()
 	//Seed = 0; // For Debugging
 	srand(Seed);
 
-	// 배열
-	//Day0522_Array_Run();
-
-	// 배열 간단 실습
-	//Day0522_Array_Example01();
-	//Day0522_Array_Example02();
-	//Day0522_Array_Example03();
-
-	// 캐스팅
-	//Day0522_Casting();
-
-	// 참조
-	//Day0522_Reference();
-
-	// 배열 파라미터
-	//Day0522_ArrayParameter();
-
-	// 실습
-	//Day0522_Practice01();
-	//Day0522_Practice02();
-	//Day0522_Practice03();
-	Day0522_Practice04();
-
+	// 포인터
+	Day0526();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
