@@ -1,15 +1,17 @@
 #include "Day0526_PointerPractice_1.h"
 
-const int MazeRowSize				= 10;
-const int MazeColumnSize			= 10;
-const int EncounterRate				= 30;
-const int InitialHP					= 100;
-const int InitialGold				= 1000;
-const int MinimumDamage				= 5;
-const int MaximumDamage				= 15;
-const int CriticalRate				= 10;
-const int CriticalDamageMultiplier	= 2;
-const int InvalidPosition			= -1;
+const int MazeRowSize					= 10;
+const int MazeColumnSize				= 10;
+const int EncounterRate					= 40;
+const int InitialHP						= 100;
+const int InitialGold					= 1000;
+const int MinimumDamage					= 5;
+const int MaximumDamage					= 10;
+const int InitialPlayerMinimumDamage	= 10;
+const int InitialPlayerMaximumDamage	= 15;
+const int CriticalRate					= 10;
+const int CriticalDamageMultiplier		= 2;
+const int InvalidPosition				= -1;
 
 const char* ShapeRoad			= ". ";
 const char* ShapeWall			= "# ";
@@ -44,8 +46,8 @@ void Day0526_Practice_01()
 
 	int PlayerHP = InitialHP;
 	int PlayerGold = InitialGold;
-	int PlayerMinimumDamage = MinimumDamage;
-	int PlayerMaximumDamage = MaximumDamage;
+	int PlayerMinimumDamage = InitialPlayerMinimumDamage;
+	int PlayerMaximumDamage = InitialPlayerMaximumDamage;
 	int PlayerX = InvalidPosition;
 	int PlayerY = InvalidPosition;
 
@@ -64,7 +66,7 @@ void Day0526_Practice_01()
 		system("cls");
 		PrintMaze(PlayerX, PlayerY);
 
-		PrintPlayerStatus(PlayerHP, PlayerGold);
+		PrintPlayerStatus(PlayerHP, PlayerGold, PlayerMinimumDamage, PlayerMaximumDamage);
 
 		printf("이동할 수 있는 방향을 선택하세요(w: 위, s : 아래, a : 왼쪽, d : 오른쪽)\n");
 		PrintMovableDirections(PlayerX, PlayerY);
@@ -85,7 +87,7 @@ void Day0526_Practice_01()
 		// 랜덤 인카운터
 		EncounterType Encounter = None;
 		bool bEncounter = IsEncountered(Encounter);
-		if (bEncounter)
+		if (bEncounter && *MazePointer(PlayerY, PlayerX) != TileEnd)
 		{
 			ProcessEncounter(Encounter, PlayerHP, PlayerGold, PlayerMinimumDamage, PlayerMaximumDamage);
 
@@ -108,7 +110,6 @@ void Day0526_Practice_01()
 		printf("\n[플레이어가 사망했습니다..]\n");
 	}
 }
-
 
 void PrintDivider(wchar_t Divider, int Count)
 {
@@ -186,11 +187,12 @@ void PrintMaze(int PlayerX, int PlayerY)
 	}
 }
 
-void PrintPlayerStatus(int PlayerHP, int PlayerGold)
+void PrintPlayerStatus(int PlayerHP, int PlayerGold, int PlayerMinimumDamage, int PlayerMaximumDamage)
 {
 	printf("\n플레이어 체력 (%d) ", PlayerHP);
 	PrintHpBar(PlayerHP);
 	printf("  |  플레이어 소지 금액 : %dg", PlayerGold);
+	printf("  |  플레이어 데미지 : %d~%d", PlayerMinimumDamage, PlayerMaximumDamage);
 	printf("\n");
 }
 
@@ -341,23 +343,23 @@ bool IsEncountered(EncounterType& Encounter)
 {
 	// 랜덤 숫자가 0 ~ 30면 인카운터
 	int RandomNumber = (rand() % 100);
-	if (RandomNumber < 6)
+	if (RandomNumber < 15)
 	{
 		Encounter = Monster;
 	}
-	else if (RandomNumber < 12)
+	else if (RandomNumber < 25)
 	{
 		Encounter = Shop;
 	}
-	else if (RandomNumber < 18)
+	else if (RandomNumber < 30)
 	{
 		Encounter = Recovery;
 	}
-	else if (RandomNumber < 24)
+	else if (RandomNumber < 35)
 	{
 		Encounter = Trap;
 	}
-	else if (RandomNumber < 30)
+	else if (RandomNumber < 40)
 	{
 		Encounter = Treasure;
 	}
@@ -441,11 +443,18 @@ void ProcessEncounter(EncounterType Encounter, int& PlayerHP, int& PlayerGold, i
 
 		if (Decision == 1)
 		{
-			printf("\n[무기를 구입했습니다!]\n");
-			printf("플레이어의 공격력이 10 증가합니다.\n");
-			PlayerGold -= 500;
-			PlayerMinimumDamage += 10;
-			PlayerMaximumDamage += 10;
+			if (PlayerGold < 500)
+			{
+				printf("\n[소지 금액이 부족합니다...]\n");
+			}
+			else
+			{
+				printf("\n[무기를 구입했습니다!]\n");
+				printf("플레이어의 공격력이 10 증가합니다.\n");
+				PlayerGold -= 500;
+				PlayerMinimumDamage += 10;
+				PlayerMaximumDamage += 10;
+			}
 		}
 
 		break;

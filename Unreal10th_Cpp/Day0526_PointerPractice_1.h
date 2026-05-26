@@ -58,7 +58,7 @@ int* MazePointer(int Row, int Column);
 void FindStart(int& OutX, int& OutY);
 bool CanPlayMazeGame(int PlayerHP, int PlayerX, int PlayerY);
 void PrintMaze(int PlayerX, int PlayerY);
-void PrintPlayerStatus(int PlayerHP, int PlayerGold);
+void PrintPlayerStatus(int PlayerHP, int PlayerGold, int PlayerMinimumDamage, int PlayerMaximumDamage);
 void PrintMovableDirections(int PlayerX, int PlayerY);
 DirectionType GetInputDirection();
 int DirectionType2Int(DirectionType Direction);
