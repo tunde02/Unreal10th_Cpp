@@ -117,6 +117,12 @@ char* MyStrCpy(char* Destination, const char* Source)
     Destination[i] = '\0';
 
     return Destination;
+
+    /*
+    char* Result = Destination;
+    while ((*Destination++ = *Source++) != '\0') {}
+    return Result;
+    */
 }
 
 char* MyStrCat(char* Destination, const char* Source)
@@ -131,6 +137,18 @@ char* MyStrCat(char* Destination, const char* Source)
     }
 
     return Destination;
+
+    /*
+    char* Result = Destination;
+    while (*Destination)
+    {
+        Destination++;
+    }
+
+    while ((*Destination++ = *Source++) != '\0') {}
+
+    return Result;
+    */
 }
 
 int MyStrCmp(const char* String1, const char* String2)
@@ -163,6 +181,15 @@ int MyStrCmp(const char* String1, const char* String2)
     }
 
     return Result;
+
+    /*
+    while (*String1 && (*String1 == *String2))
+    {
+        String1++;
+        String2++;
+    }
+    return *(const unsigned char*)String1 - *(const unsigned char*)String2;
+    */
 }
 
 int MyAtoI(const char* String)
@@ -206,6 +233,42 @@ int MyAtoI(const char* String)
     Number *= Sign;
 
     return Number;
+
+    /*
+    // 공백 제거
+    while (*String == ' ' || *String == '\t' || *String == '\n' || *String == '\r')
+    {
+        String++;
+    }
+
+    // 부호 처리
+    int Sign = 1;
+    if (*String == '-')
+    {
+        Sign = -1;
+        String++;
+    }
+    else if (*String == '+')
+    {
+        String++;
+    }
+
+    // 문자를 숫자로 바꾸기
+    int Result = 0;
+    while ('0' <= *String && *String <= '9')
+    { 
+        Result = Result * 10 + (*String - '0');
+        String++;
+    }
+    
+    // 숫자가 아닌 것이 나왔을 때 처리
+    if (*String != '\0')
+    {
+        Result = 0;
+    }
+
+    return Result * Sign;
+    */
 }
 
 float MyAtoF(const char* String)
@@ -266,4 +329,58 @@ float MyAtoF(const char* String)
     Number *= Sign;
 
     return Number;
+
+    /*
+    
+    // 공백 제거
+    while (*String == ' ' || *String == '\t' || *String == '\n' || *String == '\r')
+    {
+        String++;
+    }
+
+    // 부호 처리
+    int Sign = 1;
+    if (*String == '-')
+    {
+        Sign = -1;
+        String++;
+    }
+    else if (*String == '+')
+    {
+        String++;
+    }
+    
+    // 문자를 숫자로 바꾸기
+    float Result = 0.0f;
+    while ('0' <= *String && *String <= '9')
+    {
+        Result = Result * 10.0f + (*String - '0');
+        String++;
+    }
+
+    // 소수점 처리
+    if (*String == '.')
+    {
+        String++;
+
+        // 문자를 숫자로 바꾸기
+        float Fraction = 1.0f; // 소수점 아래로 얼마나 내려갈지 누적
+        while ('0' <= *String && *String <= '9')
+        {
+            Result = Result * 10.0f + (*String - '0');
+            String++;
+            Fraction *= 0.1f;
+        }
+        Result *= Fraction;
+    }
+
+    // 숫자가 아닌 것이 나왔을 때 처리
+    if (*String != '\0')
+    {
+        Result = 0;
+    }
+
+    return Result * Sign;
+    
+    */
 }
