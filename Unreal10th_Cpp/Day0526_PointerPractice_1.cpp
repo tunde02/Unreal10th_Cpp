@@ -1,34 +1,12 @@
 #include "Day0526_PointerPractice_1.h"
 
-const int MazeRowSize					= 10;
-const int MazeColumnSize				= 10;
-const int EncounterRate					= 40;
-const int InitialHP						= 100;
-const int InitialGold					= 1000;
-const int MinimumDamage					= 5;
-const int MaximumDamage					= 10;
-const int InitialPlayerMinimumDamage	= 10;
-const int InitialPlayerMaximumDamage	= 15;
-const int CriticalRate					= 10;
-const int CriticalDamageMultiplier		= 2;
-const int InvalidPosition				= -1;
-
-const char* ShapeRoad			= ". ";
-const char* ShapeWall			= "# ";
-const char* ShapeStart			= "S ";
-const char* ShapeEnd			= "E ";
-const char* ShapePlayer			= "P ";
-const char* ShapeGrave			= "X ";
-const char* ShapeMonster		= "M ";
-const char* ShapeBossMonster	= "B ";
-const char* ShapeShop			= "I ";
-const char* ShapeRecovery		= "+ ";
-const char* ShapeTrap			= "- ";
-const char* ShapeTreasure		= "T ";
-
-int* Maze = new int[MazeRowSize * MazeColumnSize]
+void Day0526_Practice_01()
 {
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    // 2. 미로 탈출 게임에 랜덤 인카운터 종류 늘려보기
+
+    Maze = new int[MazeRowSize * MazeColumnSize]
+    {
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 2, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
@@ -38,12 +16,7 @@ int* Maze = new int[MazeRowSize * MazeColumnSize]
         1, 0, 1, 1, 1, 1, 1, 1, 0, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-};
-
-
-void Day0526_Practice_01()
-{
-    // 2. 미로 탈출 게임에 랜덤 인카운터 종류 늘려보기
+    };
 
     int PlayerHP = InitialHP;
     int PlayerGold = InitialGold;
@@ -86,9 +59,8 @@ void Day0526_Practice_01()
         PlayerY += Dy[DirectionIndex];
 
         // 랜덤 인카운터
-        EncounterType Encounter = None;
-        bool bEncounter = IsEncountered(Encounter);
-        if (bEncounter && *MazePointer(PlayerY, PlayerX) != TileEnd)
+        EncounterType Encounter = IsEncountered();
+        if (Encounter != None && *MazePointer(PlayerY, PlayerX) != TileEnd)
         {
             ProcessEncounter(Encounter, PlayerHP, PlayerGold, PlayerMinimumDamage, PlayerMaximumDamage);
 
@@ -343,29 +315,29 @@ int CalcDamage(int MinimumDamage, int MaximumDamage, bool& OutIsCritical)
     return Damage;
 }
 
-bool IsEncountered(EncounterType& Encounter)
+EncounterType IsEncountered()
 {
     // 랜덤 숫자가 0 ~ 30면 인카운터
     int RandomNumber = (rand() % 100);
     if (RandomNumber < 15)
     {
-        Encounter = Monster;
+        return Monster;
     }
     else if (RandomNumber < 25)
     {
-        Encounter = Shop;
+        return Shop;
     }
     else if (RandomNumber < 30)
     {
-        Encounter = Recovery;
+        return Recovery;
     }
     else if (RandomNumber < 35)
     {
-        Encounter = Trap;
+        return Trap;
     }
     else if (RandomNumber < 40)
     {
-        Encounter = Treasure;
+        return Treasure;
     }
     else
     {

@@ -5,6 +5,34 @@ using std::cin;
 
 void Day0526_Practice_01();
 
+const int MazeRowSize					= 10;
+const int MazeColumnSize				= 10;
+const int EncounterRate					= 40;
+const int InitialHP						= 100;
+const int InitialGold					= 1000;
+const int MinimumDamage					= 5;
+const int MaximumDamage					= 10;
+const int InitialPlayerMinimumDamage	= 10;
+const int InitialPlayerMaximumDamage	= 15;
+const int CriticalRate					= 10;
+const int CriticalDamageMultiplier		= 2;
+const int InvalidPosition				= -1;
+
+const char* const ShapeRoad			= ". ";
+const char* const ShapeWall			= "# ";
+const char* const ShapeStart		= "S ";
+const char* const ShapeEnd			= "E ";
+const char* const ShapePlayer		= "P ";
+const char* const ShapeGrave		= "X ";
+const char* const ShapeMonster		= "M ";
+const char* const ShapeBossMonster	= "B ";
+const char* const ShapeShop			= "I ";
+const char* const ShapeRecovery		= "+ ";
+const char* const ShapeTrap			= "- ";
+const char* const ShapeTreasure		= "T ";
+
+extern int* Maze;
+
 enum TileType
 {
 	TileRoad		= 0,
@@ -66,5 +94,5 @@ bool IsValidDirectionType(DirectionType Target);
 bool CanMoveTo(int PlayerX, int PlayerY, DirectionType Direction);
 void PrintHpBar(int HP);
 int CalcDamage(int MinimumDamage, int MaximumDamage, bool& OutIsCritical);
-bool IsEncountered(EncounterType& Encounter);
+EncounterType IsEncountered();
 void ProcessEncounter(EncounterType Encounter, int& PlayerHP, int& PlayerGold, int& PlayerMinimumDamage, int& PlayerMaximumDamage);
