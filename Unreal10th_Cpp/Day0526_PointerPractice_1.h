@@ -5,6 +5,41 @@ using std::cin;
 
 void Day0526_Practice_01();
 
+enum TileType
+{
+	TileRoad		= 0,
+	TileWall		= 1,
+	TileStart		= 2,
+	TileEnd			= 3,
+	TilePlayer		= 4,
+	TileGrave		= 5,
+	TileMonster		= 6,
+	TileBossMonster = 7,
+	TileShop		= 8,
+	TileRecovery	= 9,
+	TileTrap		= 10,
+	TileTreasure	= 11
+};
+
+enum DirectionType
+{
+	Up,
+	Down,
+	Left,
+	Right
+};
+
+enum EncounterType
+{
+	ET_None,
+	ET_Monster,
+	BossMonster,
+	ET_Shop,
+	ET_Recovery,
+	ET_Trap,
+	ET_Treasure
+};
+
 const int MazeRowSize					= 10;
 const int MazeColumnSize				= 10;
 const int EncounterRate					= 40;
@@ -31,44 +66,12 @@ const char* const ShapeRecovery		= "+ ";
 const char* const ShapeTrap			= "- ";
 const char* const ShapeTreasure		= "T ";
 
-extern int* Maze;
-
-enum TileType
-{
-	TileRoad		= 0,
-	TileWall		= 1,
-	TileStart		= 2,
-	TileEnd			= 3,
-	TilePlayer		= 4,
-	TileGrave		= 5,
-	TileMonster		= 6,
-	TileBossMonster = 7,
-	TileShop		= 8,
-	TileRecovery	= 9,
-	TileTrap		= 10,
-	TileTreasure	= 11
-};
-enum DirectionType
-{
-	Up,
-	Down,
-	Left,
-	Right
-};
-enum EncounterType
-{
-	None,
-	Monster,
-	BossMonster,
-	Shop,
-	Recovery,
-	Trap,
-	Treasure
-};
 const int Dx[4] = { 0, 0, -1, 1 };
 const int Dy[4] = { -1, 1, 0, 0 };
 const int CIN_IGNORE_LENGTH = 10000;
 const char CIN_IGNORE_DELIMITER = '\n';
+
+extern int* Maze;
 
 template <typename T>
 T SafeInput(T DefaultValue)
@@ -96,3 +99,9 @@ void PrintHpBar(int HP);
 int CalcDamage(int MinimumDamage, int MaximumDamage, bool& OutIsCritical);
 EncounterType IsEncountered();
 void ProcessEncounter(EncounterType Encounter, int& PlayerHP, int& PlayerGold, int& PlayerMinimumDamage, int& PlayerMaximumDamage);
+void ProcessBattle(int& PlayerHP, int& PlayerMinimumDamage, int& PlayerMaximumDamage);
+void ProcessShop(int& PlayerGold, int& PlayerMinimumDamage, int& PlayerMaximumDamage);
+void ProcessRecovery(int& PlayerHP);
+void ProcessTrap(int& PlayerHP);
+void ProcessTreasure(int& PlayerGold);
+void RecordMazeTile(int PlayerX, int PlayerY, EncounterType Encounter);

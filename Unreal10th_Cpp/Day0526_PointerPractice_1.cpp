@@ -1,5 +1,7 @@
 #include "Day0526_PointerPractice_1.h"
 
+int* Maze = nullptr;
+
 void Day0526_Practice_01()
 {
     // 2. 미로 탈출 게임에 랜덤 인카운터 종류 늘려보기
@@ -60,9 +62,10 @@ void Day0526_Practice_01()
 
         // 랜덤 인카운터
         EncounterType Encounter = IsEncountered();
-        if (Encounter != None && *MazePointer(PlayerY, PlayerX) != TileEnd)
+        if (Encounter != ET_None && *MazePointer(PlayerY, PlayerX) != TileEnd)
         {
             ProcessEncounter(Encounter, PlayerHP, PlayerGold, PlayerMinimumDamage, PlayerMaximumDamage);
+            RecordMazeTile(PlayerX, PlayerY, Encounter);
 
             if (PlayerHP <= 0)
             {
@@ -157,6 +160,26 @@ void PrintMaze(int PlayerX, int PlayerY)
             else if (*MazePointer(y, x) == TileEnd)
             {
                 printf(ShapeEnd);
+            }
+            else if (*MazePointer(y, x) == TileMonster)
+            {
+                printf(ShapeMonster);
+            }
+            else if (*MazePointer(y, x) == TileShop)
+            {
+                printf(ShapeShop);
+            }
+            else if (*MazePointer(y, x) == TileRecovery)
+            {
+                printf(ShapeRecovery);
+            }
+            else if (*MazePointer(y, x) == TileTrap)
+            {
+                printf(ShapeTrap);
+            }
+            else if (*MazePointer(y, x) == TileTreasure)
+            {
+                printf(ShapeTreasure);
             }
         }
         printf("\n");
@@ -321,27 +344,27 @@ EncounterType IsEncountered()
     int RandomNumber = (rand() % 100);
     if (RandomNumber < 15)
     {
-        return Monster;
+        return ET_Monster;
     }
     else if (RandomNumber < 25)
     {
-        return Shop;
+        return ET_Shop;
     }
     else if (RandomNumber < 30)
     {
-        return Recovery;
+        return ET_Recovery;
     }
     else if (RandomNumber < 35)
     {
-        return Trap;
+        return ET_Trap;
     }
     else if (RandomNumber < 40)
     {
-        return Treasure;
+        return ET_Treasure;
     }
     else
     {
-        return None;
+        return ET_None;
     }
 }
 
@@ -351,106 +374,20 @@ void ProcessEncounter(EncounterType Encounter, int& PlayerHP, int& PlayerGold, i
 
     switch (Encounter)
     {
-        case Monster:
-        {
-            printf("[몬스터를 조우했습니다..!!]\n\n");
-
-            int MonsterHP = InitialHP;
-
-            while (PlayerHP > 0 && MonsterHP > 0)
-            {
-                printf("플레이어 체력(%d)", PlayerHP);
-                PrintHpBar(PlayerHP);
-                printf("  |  몬스터 체력(%d)", MonsterHP);
-                PrintHpBar(MonsterHP);
-                printf("\n");
-
-                printf("공격하려면 아무 키나 입력하세요 : ");
-                cin.get();
-
-                bool IsCritical = false;
-                int PlayerDamage = CalcDamage(PlayerMinimumDamage, PlayerMaximumDamage, IsCritical);
-
-                if (!IsCritical)
-                {
-                    printf("[플레이어의 공격] : %d\n", PlayerDamage);
-                }
-                else
-                {
-                    printf("[플레이어의 공격 (크리티컬!)] : %d\n", PlayerDamage);
-                }
-
-                MonsterHP -= PlayerDamage;
-
-                if (MonsterHP > 0)
-                {
-                    int MonsterDamage = CalcDamage(MinimumDamage, MaximumDamage, IsCritical);
-
-                    if (!IsCritical)
-                    {
-                        printf("[몬스터의 공격] : %d\n", MonsterDamage);
-                    }
-                    else
-                    {
-                        printf("[몬스터의 공격 (크리티컬!)] : %d\n", MonsterDamage);
-                    }
-
-                    PlayerHP -= MonsterDamage;
-                }
-                else
-                {
-                    printf("\n[몬스터를 처치했습니다!!]\n");
-                }
-
-                printf("\n");
-            }
+        case ET_Monster:
+            ProcessBattle(PlayerHP, PlayerMinimumDamage, PlayerMaximumDamage);
             break;
-        }
-        case Shop:
-        {
-            printf("[상점을 방문했습니다.]\n\n");
-            printf("무기를 구입하시겠습니까? (500g)\n");
-            printf("1) 예  2) 아니오\n");
-            printf(" : ");
-            int Decision = SafeInput(0);
-            while (!(Decision == 1 || Decision == 2))
-            {
-                printf("[ERROR]  올바른 숫자를 입력하세요 : ");
-                Decision = SafeInput(0);
-            }
-
-            if (Decision == 1)
-            {
-                if (PlayerGold < 500)
-                {
-                    printf("\n[소지 금액이 부족합니다...]\n");
-                }
-                else
-                {
-                    printf("\n[무기를 구입했습니다!]\n");
-                    printf("플레이어의 공격력이 10 증가합니다.\n");
-                    PlayerGold -= 500;
-                    PlayerMinimumDamage += 10;
-                    PlayerMaximumDamage += 10;
-                }
-            }
-
+        case ET_Shop:
+            ProcessShop(PlayerGold, PlayerMinimumDamage, PlayerMaximumDamage);
             break;
-        }
-        case Recovery:
-            printf("[쉼터를 발견했습니다.]\n");
-            printf("플레이어가 체력을 50 회복합니다\n");
-            PlayerHP = PlayerHP + 50 > 100 ? 100 : PlayerHP + 50;
+        case ET_Recovery:
+            ProcessRecovery(PlayerHP);
             break;
-        case Trap:
-            printf("[함정을 밟았습니다...]\n");
-            printf("플레이어가 체력을 15 잃습니다\n");
-            PlayerHP -= 15;
+        case ET_Trap:
+            ProcessTrap(PlayerHP);
             break;
-        case Treasure:
-            printf("[보물을 발견했습니다!!]\n");
-            printf("플레이어가 1000g 를 얻었습니다\n");
-            PlayerGold += 1000;
+        case ET_Treasure:
+            ProcessTreasure(PlayerGold);
             break;
         default:
             break;
@@ -460,4 +397,143 @@ void ProcessEncounter(EncounterType Encounter, int& PlayerHP, int& PlayerGold, i
     cin.get();
 
     PrintDivider('-', 50);
+}
+
+void ProcessBattle(int& PlayerHP, int& PlayerMinimumDamage, int& PlayerMaximumDamage)
+{
+    printf("[몬스터를 조우했습니다..!!]\n\n");
+
+    int MonsterHP = InitialHP;
+
+    while (PlayerHP > 0 && MonsterHP > 0)
+    {
+        printf("플레이어 체력(%d)", PlayerHP);
+        PrintHpBar(PlayerHP);
+        printf("  |  몬스터 체력(%d)", MonsterHP);
+        PrintHpBar(MonsterHP);
+        printf("\n");
+
+        printf("공격하려면 아무 키나 입력하세요 : ");
+        cin.get();
+
+        bool IsCritical = false;
+        int PlayerDamage = CalcDamage(PlayerMinimumDamage, PlayerMaximumDamage, IsCritical);
+
+        if (!IsCritical)
+        {
+            printf("[플레이어의 공격] : %d\n", PlayerDamage);
+        }
+        else
+        {
+            printf("[플레이어의 공격 (크리티컬!)] : %d\n", PlayerDamage);
+        }
+
+        MonsterHP -= PlayerDamage;
+
+        if (MonsterHP > 0)
+        {
+            int MonsterDamage = CalcDamage(MinimumDamage, MaximumDamage, IsCritical);
+
+            if (!IsCritical)
+            {
+                printf("[몬스터의 공격] : %d\n", MonsterDamage);
+            }
+            else
+            {
+                printf("[몬스터의 공격 (크리티컬!)] : %d\n", MonsterDamage);
+            }
+
+            PlayerHP -= MonsterDamage;
+        }
+        else
+        {
+            printf("\n[몬스터를 처치했습니다!!]\n");
+        }
+
+        printf("\n");
+    }
+}
+
+void ProcessShop(int& PlayerGold, int& PlayerMinimumDamage, int& PlayerMaximumDamage)
+{
+    const int WeaponPrice = 500;
+    const int WeaponDamage = 10;
+
+    printf("[상점을 방문했습니다.]\n\n");
+    printf("무기를 구입하시겠습니까? (%dg)\n", WeaponPrice);
+    printf("1) 예  2) 아니오\n");
+    printf(" : ");
+    int Decision = SafeInput(0);
+    while (!(Decision == 1 || Decision == 2))
+    {
+        printf("[ERROR]  올바른 숫자를 입력하세요 : ");
+        Decision = SafeInput(0);
+    }
+
+    if (Decision == 1)
+    {
+        if (PlayerGold < WeaponPrice)
+        {
+            printf("\n[소지 금액이 부족합니다...]\n");
+        }
+        else
+        {
+            printf("\n[무기를 구입했습니다!]\n");
+            printf("플레이어의 공격력이 %d 증가합니다.\n", WeaponDamage);
+            PlayerGold -= WeaponPrice;
+            PlayerMinimumDamage += WeaponDamage;
+            PlayerMaximumDamage += WeaponDamage;
+        }
+    }
+}
+
+void ProcessRecovery(int& PlayerHP)
+{
+    const int RecoveryAmount = 50;
+
+    printf("[쉼터를 발견했습니다.]\n");
+    printf("플레이어가 체력을 %d 회복합니다\n", RecoveryAmount);
+    PlayerHP = PlayerHP + RecoveryAmount > 100 ? 100 : PlayerHP + RecoveryAmount;
+}
+
+void ProcessTrap(int& PlayerHP)
+{
+    const int TrapDamage = 15;
+
+    printf("[함정을 밟았습니다...]\n");
+    printf("플레이어가 체력을 %d 잃습니다\n", TrapDamage);
+    PlayerHP -= TrapDamage;
+}
+
+void ProcessTreasure(int& PlayerGold)
+{
+    const int TreasureValue = 1000;
+
+    printf("[보물을 발견했습니다!!]\n");
+    printf("플레이어가 %dg 를 얻었습니다\n", TreasureValue);
+    PlayerGold += TreasureValue;
+}
+
+void RecordMazeTile(int PlayerX, int PlayerY, EncounterType Encounter)
+{
+    switch (Encounter)
+    {
+        case ET_Monster:
+            *MazePointer(PlayerY, PlayerX) = TileMonster;
+            break;
+        case ET_Shop:
+            *MazePointer(PlayerY, PlayerX) = TileShop;
+            break;
+        case ET_Recovery:
+            *MazePointer(PlayerY, PlayerX) = TileRecovery;
+            break;
+        case ET_Trap:
+            *MazePointer(PlayerY, PlayerX) = TileTrap;
+            break;
+        case ET_Treasure:
+            *MazePointer(PlayerY, PlayerX) = TileTreasure;
+            break;
+        default:
+            break;
+    }
 }
