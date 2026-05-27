@@ -9,3 +9,4 @@ char* MyStrCat(char* Destination, const char* Source);
 int MyStrCmp(const char* String1, const char* String2);
 int MyAtoI(const char* String);
 float MyAtoF(const char* String);
+bool IsEqualFloat(float Float1, float Float2);
