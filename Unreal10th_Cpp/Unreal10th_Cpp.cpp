@@ -10,7 +10,8 @@
 //#include "Day0521_FunctionPractice_3.h"
 //#include "Day0522.h"
 //#include "Day0526.h"
-#include "Day0526_PointerPractice_1.h"
+//#include "Day0526_PointerPractice_1.h"
+#include "Day0527.h"
 using std::cin;
 
 int main()
@@ -20,7 +21,9 @@ int main()
 	srand(Seed);
 
 	// 실습
-	Day0526_Practice_01();
+	//Day0526_Practice_01();
+
+	Day0527();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

@@ -130,6 +130,7 @@
     <ClCompile Include="Day0522.cpp" />
     <ClCompile Include="Day0526.cpp" />
     <ClCompile Include="Day0526_PointerPractice_1.cpp" />
+    <ClCompile Include="Day0527.cpp" />
     <ClCompile Include="Unreal10th_Cpp.cpp" />
   </ItemGroup>
   <ItemGroup>
