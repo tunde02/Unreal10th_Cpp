@@ -13,19 +13,22 @@
 //#include "Day0526_PointerPractice_1.h"
 //#include "Day0527.h"
 //#include "Day0528.h"
-#include "Day0528_Practice_1.h"
+//#include "Day0528_Practice_1.h"
+#include "Day0529.h"
 using std::cin;
 
 int main()
 {
-	unsigned int Seed = (unsigned int)time(0);
-	//Seed = 0; // For Debugging
-	srand(Seed);
+    unsigned int Seed = (unsigned int)time(0);
+    //Seed = 0; // For Debugging
+    srand(Seed);
 
-	// 실습
-	//Day0526_Practice_01();
+    // 실습
+    //Day0526_Practice_01();
 
-	Day0528_Practice_1::Day0528_Practice_1();
+    //Day0528_Practice_1::Day0528_Practice_1();
+
+    Day0529();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
