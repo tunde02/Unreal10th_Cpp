@@ -135,6 +135,8 @@
     <ClCompile Include="Day0528_Practice_1.cpp" />
     <ClCompile Include="Day0529.cpp" />
     <ClCompile Include="Day0529_Practice_1.cpp" />
+    <ClCompile Include="Day0602.cpp" />
+    <ClCompile Include="Day0602_Practice_1.cpp" />
     <ClCompile Include="Unreal10th_Cpp.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -155,6 +157,8 @@
     <ClInclude Include="Day0528_Practice_1.h" />
     <ClInclude Include="Day0529.h" />
     <ClInclude Include="Day0529_Practice_1.h" />
+    <ClInclude Include="Day0602.h" />
+    <ClInclude Include="Day0602_Practice_1.h" />
     <ClInclude Include="MazeEnemy.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Utils.h" />

@@ -15,7 +15,8 @@
 //#include "Day0528.h"
 //#include "Day0528_Practice_1.h"
 //#include "Day0529.h"
-#include "Day0529_Practice_1.h"
+//#include "Day0529_Practice_1.h"
+#include "Day0602.h"
 using std::cin;
 
 int main()
@@ -24,23 +25,10 @@ int main()
     //Seed = 0; // For Debugging
     srand(Seed);
 
-    // 실습
-    //Day0526_Practice_01();
-
-    //Day0528_Practice_1::Day0528_Practice_1();
-
     //Day0529();
-    Day0529_Practice_1::Day0529_Practice_1();
+    //Day0529_Practice_1::Day0529_Practice_1();
 
-    printf("\n");
-    Position P1(2, 3);
-    Position P2(5, 1);
-
-    Position Sum = P1 + P2;
-    Position Diff = P1 - P2;
-
-    printf("Position(%d, %d) + Position(%d, %d) = Position(%d, %d)\n", P1.X, P1.Y, P2.X, P2.Y, Sum.X, Sum.Y);
-    printf("Position(%d, %d) - Position(%d, %d) = Position(%d, %d)\n", P1.X, P1.Y, P2.X, P2.Y, Diff.X, Diff.Y);
+    Day0602();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
