@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Day0521_2.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_1.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_2.cpp" />
@@ -137,10 +138,16 @@
     <ClCompile Include="Day0529_Practice_1.cpp" />
     <ClCompile Include="Day0602.cpp" />
     <ClCompile Include="Day0602_Practice_1.cpp" />
+    <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="Kobold.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Unreal10th_Cpp.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="Day0515.h" />
     <ClInclude Include="Day0518.h" />
     <ClInclude Include="Day0519.h" />
@@ -159,8 +166,13 @@
     <ClInclude Include="Day0529_Practice_1.h" />
     <ClInclude Include="Day0602.h" />
     <ClInclude Include="Day0602_Practice_1.h" />
+    <ClInclude Include="Goblin.h" />
+    <ClInclude Include="Kobold.h" />
     <ClInclude Include="MazeEnemy.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="Slime.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
