@@ -1,5 +1,6 @@
 #pragma once
 #include "Day0602.h"
+#include "LinkedList.h"
 #include <type_traits>
 
 class Day0605
@@ -7,6 +8,9 @@ class Day0605
 public:
     void Interface();
     void EnumClass();
+    void TestList();
+    void Test_STL_List();
+    void Test_STL_Vector();
 };
 
 class Test0605_1 : public IFlyable
