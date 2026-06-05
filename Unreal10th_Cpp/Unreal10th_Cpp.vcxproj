@@ -138,6 +138,7 @@
     <ClCompile Include="Day0529_Practice_1.cpp" />
     <ClCompile Include="Day0602.cpp" />
     <ClCompile Include="Day0602_Practice_1.cpp" />
+    <ClCompile Include="Day0605.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Kobold.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Day0529_Practice_1.h" />
     <ClInclude Include="Day0602.h" />
     <ClInclude Include="Day0602_Practice_1.h" />
+    <ClInclude Include="Day0605.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Kobold.h" />
     <ClInclude Include="MazeEnemy.h" />

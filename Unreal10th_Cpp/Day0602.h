@@ -14,6 +14,29 @@ void Day0602_Virtual();
 //   - 잠을 잘 수 있다. 잠을 자면 나이가 증가하고, 에너지가 완전히 회복된다
 //   - 자신의 모든 정보를 출력할 수 있다
 
+class IFlyable
+{
+public:
+    virtual void Fly() = 0;
+    virtual ~IFlyable() = default;
+};
+
+class IAttackable
+{
+public:
+    virtual void Attack(IAttackable* Target) = 0;
+    virtual void Defence(int Damage) = 0;
+    virtual ~IAttackable() = default;
+};
+
+class ISwimmable
+{
+public:
+    virtual void Swim() = 0;
+    virtual ~ISwimmable() = default;
+};
+
+
 class Animal
 {
 protected:
@@ -47,7 +70,7 @@ public: // 접근 제한자
     inline void SetAge(int InAge) { Age = InAge; }
 };
 
-class Bird : public Animal
+class Bird : public Animal, public IFlyable
 {
 private:
     const float FlyEnergy = 20.0f;
@@ -59,7 +82,7 @@ public:
     }
 
     virtual void Yell() const override;
-    void Fly();
+    virtual void Fly() override;
 };
 
 class Eagle : public Bird
@@ -75,6 +98,7 @@ public:
 
     virtual void Yell() const override;
     virtual void Move() override;
+    virtual void Fly() override { printf("독수리 날다\n"); }
     void FastFly();
 };
 
@@ -82,7 +106,7 @@ public:
 // Animal의 자식 클래스 5가지 이상 만들기
 // 각 자식 클래스는 자신만의 기능이 있어야 한다
 
-class Whale : public Animal
+class Whale : public Animal, public ISwimmable
 {
 private:
     const float SwimEnergy = 10.0f;
@@ -95,7 +119,7 @@ public:
 
     virtual void Yell() const override;
     virtual void Move() override;
-    void Swim();
+    virtual void Swim() override;
 };
 
 class Snake : public Animal
@@ -129,7 +153,7 @@ public:
     void Run();
 };
 
-class Kangaroo : public Animal
+class Kangaroo : public Animal, public IAttackable
 {
 private:
     const float JumpEnergy = 15.0f;
@@ -142,6 +166,8 @@ public:
 
     virtual void Move() override;
     void Jump();
+    virtual void Attack(IAttackable* Target) override { printf("캥거루가 공격한다.\n"); }
+    virtual void Defence(int Damage) override {}
 };
 
 class Monkey : public Animal

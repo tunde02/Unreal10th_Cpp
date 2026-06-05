@@ -81,6 +81,9 @@
     <ClCompile Include="Kobold.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Day0605.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day0515.h">
@@ -162,6 +165,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Kobold.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Day0605.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
