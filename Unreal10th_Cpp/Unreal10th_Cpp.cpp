@@ -28,8 +28,11 @@ int main()
     srand(Seed);
 
     Day0605 day0605;
-    day0605.Interface();
-    day0605.EnumClass();
+    //day0605.Interface();
+    //day0605.EnumClass();
+    //day0605.TestList();
+    //day0605.Test_STL_List();
+    day0605.Test_STL_Vector();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
