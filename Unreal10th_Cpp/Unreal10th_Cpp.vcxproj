@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="DArray.cpp" />
     <ClCompile Include="Day0521_2.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_1.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_2.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="Day0605.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Kobold.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Slime.cpp" />
@@ -149,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="DArray.h" />
     <ClInclude Include="Day0515.h" />
     <ClInclude Include="Day0518.h" />
     <ClInclude Include="Day0519.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="Day0605.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Kobold.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="MazeEnemy.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
