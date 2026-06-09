@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="CircularQueue.cpp" />
     <ClCompile Include="DArray.cpp" />
     <ClCompile Include="Day0521_2.cpp" />
     <ClCompile Include="Day0521_FunctionPractice_1.cpp" />
@@ -140,6 +141,10 @@
     <ClCompile Include="Day0602.cpp" />
     <ClCompile Include="Day0602_Practice_1.cpp" />
     <ClCompile Include="Day0605.cpp" />
+    <ClCompile Include="Day0609.cpp" />
+    <ClCompile Include="DynamicCircularQueue.cpp" />
+    <ClCompile Include="DynamicStack.cpp" />
+    <ClCompile Include="FixedStack.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Kobold.cpp" />
     <ClCompile Include="LinkedList.cpp" />
@@ -151,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="CircularQueue.h" />
     <ClInclude Include="DArray.h" />
     <ClInclude Include="Day0515.h" />
     <ClInclude Include="Day0518.h" />
@@ -171,6 +177,10 @@
     <ClInclude Include="Day0602.h" />
     <ClInclude Include="Day0602_Practice_1.h" />
     <ClInclude Include="Day0605.h" />
+    <ClInclude Include="Day0609.h" />
+    <ClInclude Include="DynamicCircularQueue.h" />
+    <ClInclude Include="DynamicStack.h" />
+    <ClInclude Include="FixedStack.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Kobold.h" />
     <ClInclude Include="LinkedList.h" />

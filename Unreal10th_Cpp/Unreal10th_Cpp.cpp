@@ -18,7 +18,8 @@
 //#include "Day0529_Practice_1.h"
 //#include "Day0602.h"
 //#include "Day0602_Practice_1.h"
-#include "Day0605.h"
+//#include "Day0605.h"
+#include "Day0609.h"
 using std::cin;
 
 int main()
@@ -27,12 +28,8 @@ int main()
     //Seed = 0; // For Debugging
     srand(Seed);
 
-    Day0605 day0605;
-    //day0605.Interface();
-    //day0605.EnumClass();
-    //day0605.TestList();
-    //day0605.Test_STL_List();
-    day0605.Test_STL_Vector();
+    Day0609 day0609;
+    day0609.Day0609_Main();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
