@@ -8,6 +8,7 @@ class Day0610
 {
 public:
     void Day0610_Main();
+    void Day0610_Practice();
 
 private:
     void TestTemplateClass();
@@ -15,6 +16,9 @@ private:
     void TestSetSTL();
     void PrintSet(const std::set<int>& InTarget);
     void TestMapSTL();
+
+    void TestTemplateLinkedList();
+    void TestTemplateFixedStack();
 };
 
 
