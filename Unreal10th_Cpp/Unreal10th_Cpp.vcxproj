@@ -146,6 +146,7 @@
     <ClCompile Include="Day0605.cpp" />
     <ClCompile Include="Day0609.cpp" />
     <ClCompile Include="Day0610.cpp" />
+    <ClCompile Include="Day0611.cpp" />
     <ClCompile Include="DynamicCircularQueue.cpp" />
     <ClCompile Include="DynamicStack.cpp" />
     <ClCompile Include="FixedStack.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Day0605.h" />
     <ClInclude Include="Day0609.h" />
     <ClInclude Include="Day0610.h" />
+    <ClInclude Include="Day0611.h" />
     <ClInclude Include="DynamicCircularQueue.h" />
     <ClInclude Include="DynamicStack.h" />
     <ClInclude Include="FixedStack.h" />

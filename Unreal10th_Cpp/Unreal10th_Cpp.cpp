@@ -20,7 +20,8 @@
 //#include "Day0602_Practice_1.h"
 //#include "Day0605.h"
 //#include "Day0609.h"
-#include "Day0610.h"
+//#include "Day0610.h"
+#include "Day0611.h"
 using std::cin;
 
 int main()
@@ -29,8 +30,8 @@ int main()
     //Seed = 0; // For Debugging
     srand(Seed);
 
-    Day0610 day0610;
-    day0610.Day0610_Main();
+    Day0611 day0611;
+    day0611.Day0611_Main();
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

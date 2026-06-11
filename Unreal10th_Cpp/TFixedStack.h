@@ -10,7 +10,7 @@ public:
     T Pop();
     T Top() const;
 
-    inline bool IsFull() const { return TopIndex == (StackCapacity - 1); }
+    inline bool IsFull() const { return TopIndex == (Capacity - 1); }
     inline bool IsEmpty() const { return TopIndex == Empty; }
     inline int GetSize() const { return TopIndex + 1; }
 
